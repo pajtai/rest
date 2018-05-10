@@ -7,46 +7,15 @@ const express = require('express');
 const flatten = require('flat');
 const server = express();
 const helmet = require('helmet');
-const pino = require('pino');
-const logger = pino({
-    level: process.env.LOG_LEVEL
-});
-const { version } = require('../package');
-const mongoose = require('mongoose');
-const connection = mongoose.createConnection('mongodb://localhost/todos');
+const logger = require('./logger');
 
-connection.then(
-    () => logger.info('connected to Mongoose'),
-    (error) => logger.error('Mongoose connection error', error)
-);
+const connection = require('./db')(logger);
 
 logger.info('starting app');
 server.use(helmet());
 
 
-const swaggerJSDoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
-
-const options = {
-    apis: ['./models/**/*.model.js', './api/**/*.controller.js'],
-    swaggerDefinition: {
-        info: {
-            title: 'Todo API',
-            version
-        }
-    }
-};
-
-// Initialize swagger-jsdoc -> returns validated swagger spec in json format
-const swaggerSpec = swaggerJSDoc(options);
-
-server.use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-// Serve our json from express
-server.get('/api/api-docs.json', (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(swaggerSpec);
-});
+require('./swagger')(server);
 
 const app = {
     connection
