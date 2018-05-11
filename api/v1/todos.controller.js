@@ -8,7 +8,7 @@ module.exports = (app) => {
 
     /**
      *  @swagger
-     *  /api/v1/tasks:
+     *  /api/v1/todos:
      *      get:
      *          description: Get collection of all tasks
      *          produces:
@@ -31,7 +31,7 @@ module.exports = (app) => {
 
     /**
      *  @swagger
-     *  /api/v1/tasks:
+     *  /api/v1/todos:
      *      post:
      *          description: Add a task
      *          produces:

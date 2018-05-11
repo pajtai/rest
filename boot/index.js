@@ -2,14 +2,11 @@
 
 require('dotenv').config();
 
-const consign = require('consign');
 const express = require('express');
 const flatten = require('flat');
 const server = express();
 const helmet = require('helmet');
 const logger = require('./logger');
-
-const connection = require('./db')(logger);
 
 logger.info('starting app');
 server.use(helmet());
@@ -17,14 +14,9 @@ server.use(helmet());
 
 require('./swagger')(server);
 
-const app = {
-    connection
-};
-
-consign()
-    .include('models')
-    .include('api')
-    .into(app);
+const connection = require('./db');
+const app = require('./autoload')(connection);
+const flattened = flatten(app.api);
 
 /**
  * Remove .model from the keys.
@@ -33,8 +25,6 @@ consign()
 Object.entries(app.models).forEach(([modelKey, model]) => {
     app.models[modelKey.replace(/.model$/, '')] = model;
 });
-
-const flattened = flatten(app.api);
 
 Object.entries(flattened).forEach(([route, router]) => {
 
