@@ -22,9 +22,9 @@ const app = require('./autoload')(server, connection);
 const httpServer = server.listen(process.env.PORT);
 server.close = httpServer.close.bind(httpServer);
 
-console.log(`Listening at http://localhost:${process.env.PORT}`);
+console.log(`\n\nListening at http://localhost:${process.env.PORT}`);
 console.log('Swagger JSON is here: http://localhost:3333/api/api-docs.json');
-console.log('Swagger UI is here: http://localhost:3333/api/api-docs/');
+console.log('Swagger UI is here: http://localhost:3333/api/api-docs/\n');
 
 // Expose server for tests
 module.exports = {
