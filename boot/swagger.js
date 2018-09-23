@@ -12,6 +12,12 @@ module.exports = server => {
                 title: 'Todo API', // Title (required)
                 version: '0.0.0', // Version (required)
             },
+            servers:  [
+              {url: '/api/v1',
+              description: 'Live Server'},
+              {url: '/api/v2',
+                description: 'Staging Server'},
+            ],
             security: [
               {
                 api_key: []

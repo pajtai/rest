@@ -10,7 +10,7 @@ module.exports = (app) => {
 
     /**
      *  @swagger
-     *  /api/v1/tasks:
+     *  /tasks:
      *      get:
      *          description: Get collection of all tasks
      *          produces:
@@ -21,7 +21,7 @@ module.exports = (app) => {
      *                  schema:
      *                      type: array
      *                      items:
-     *                          $ref: '#/definitions/Task'
+     *                          $ref: '#/components/schemas/Task'
      */
     router.get('/', (req, res) => {
 
@@ -33,7 +33,7 @@ module.exports = (app) => {
 
     /**
      *  @swagger
-     *  /api/v1/tasks:
+     *  /tasks:
      *      post:
      *          description: Add a task
      *          produces:
@@ -42,14 +42,14 @@ module.exports = (app) => {
      *              - in: body
      *                name: task
      *                schema:
-     *                  $ref: '#/definitions/Task'
+     *                  $ref: '#/components/schemas/Task'
      *          responses:
      *              200:
      *                  description: tasks
      *                  schema:
      *                      type: object
      *                      items:
-     *                          $ref: '#/definitions/Task'
+     *                          $ref: '#/components/schemas/Task'
      */
     router.post('/', (req, res) => {
 
@@ -65,7 +65,7 @@ module.exports = (app) => {
 
     /**
      *  @swagger
-     *  /api/v1/tasks/{id}:
+     *  /tasks/{id}:
      *      delete:
      *          description: Delete a task by id
      *          parameters:

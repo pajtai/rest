@@ -8,14 +8,15 @@ module.exports = (app) => {
 
     /**
      *  @swagger
-     *  definitions:
+     *  components:
+     *    schemas:
      *      Task:
-     *          type: object
-     *          properties:
-     *              title:
-     *                  type: string
-     *              done:
-     *                  type: boolean
+     *        type: object
+     *        properties:
+     *          title:
+     *            type: string
+     *          done:
+     *            type: boolean
      */
     const tasksSchema = mongoose.Schema({
         title: String,
