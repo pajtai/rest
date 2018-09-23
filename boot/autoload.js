@@ -16,6 +16,15 @@ module.exports = (server, connection) => {
         .include('api')
         .into(app);
 
+  /**
+   *  @swagger
+   *  components:
+   *    securitySchemes:
+   *      api_key:
+   *        type: apiKey
+   *        in: header
+   *        name: X-API-KEY
+   */
     // Add controllers to the server
     const flattened = flatten(app.api);
     Object.entries(flattened).forEach(([route, router]) => {
@@ -24,7 +33,7 @@ module.exports = (server, connection) => {
         server.use(route, router);
     });
 
-    // Remove .model from the keys.
+  // Remove .model from the keys.
     // Needs to be updated if models are put into sub directories
     Object.entries(app.models).forEach(([modelKey, model]) => {
         app.models[modelKey.replace(/.model$/,'')] = model;

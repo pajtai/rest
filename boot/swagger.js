@@ -7,12 +7,18 @@ module.exports = server => {
 
     const options = {
         swaggerDefinition: {
+            openapi: "3.0.0",
             info: {
                 title: 'Todo API', // Title (required)
                 version: '0.0.0', // Version (required)
             },
+            security: [
+              {
+                api_key: []
+              }
+            ]
         },
-        apis: ['./models/**/*.model.js', './api/**/*.controller.js'], // Path to the API docs
+        apis: ['./boot/autoload.js', './models/**/*.model.js', './api/**/*.controller.js'], // Path to the API docs
     };
 
 // Initialize swagger-jsdoc -> returns validated swagger spec in json format
