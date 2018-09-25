@@ -1,6 +1,7 @@
 'use strict';
 
 const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 module.exports = server => {
 
@@ -18,11 +19,6 @@ module.exports = server => {
               {url: '/api/v2',
                 description: 'Staging Server'},
             ],
-            security: [
-              {
-                api_key: []
-              }
-            ],
             tags: [
               {
                 name: "Tasks",
@@ -30,7 +26,7 @@ module.exports = server => {
               }
             ]
         },
-        apis: ['./boot/autoload.js', './models/**/*.model.js', './api/**/*.controller.js'], // Path to the API docs
+        apis: ['./models/**/*.model.js', './api/**/*.controller.js'],
     };
 
 // Initialize swagger-jsdoc -> returns validated swagger spec in json format
@@ -41,7 +37,6 @@ module.exports = server => {
         res.send(swaggerSpec);
     });
 
-    const swaggerUi = require('swagger-ui-express');
     server.use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 };
