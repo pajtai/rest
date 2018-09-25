@@ -22,6 +22,12 @@ module.exports = server => {
               {
                 api_key: []
               }
+            ],
+            tags: [
+              {
+                name: "Tasks",
+                description: "Things to do."
+              }
             ]
         },
         apis: ['./boot/autoload.js', './models/**/*.model.js', './api/**/*.controller.js'], // Path to the API docs
