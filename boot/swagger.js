@@ -14,10 +14,14 @@ module.exports = server => {
                 version: '0.0.0', // Version (required)
             },
             servers:  [
-              {url: '/api/v1',
-              description: 'Live Server'},
-              {url: '/api/v2',
-                description: 'Staging Server'},
+              {
+                url: '/api/v1',
+                description: 'Live Server'
+              },
+              {
+                url: '/api/v2',
+                description: 'Staging Server'
+              }
             ],
             security: [
               {
