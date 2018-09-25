@@ -19,6 +19,11 @@ module.exports = server => {
               {url: '/api/v2',
                 description: 'Staging Server'},
             ],
+            security: [
+              {
+                api_key: []
+              }
+            ],
             tags: [
               {
                 name: "Tasks",
@@ -26,7 +31,7 @@ module.exports = server => {
               }
             ]
         },
-        apis: ['./models/**/*.model.js', './api/**/*.controller.js'],
+        apis: ['./boot/autoload.js', './models/**/*.model.js', './api/**/*.controller.js'], // Path to the API docs
     };
 
 // Initialize swagger-jsdoc -> returns validated swagger spec in json format
